@@ -18,7 +18,7 @@ namespace Closer.Services.Controllers
         // GET: api/Test/5
         public string Get(int id)
         {
-            return "value";
+            return "valor";
         }
 
         // POST: api/Test
