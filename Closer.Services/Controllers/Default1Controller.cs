@@ -7,31 +7,31 @@ using System.Web.Http;
 
 namespace Closer.Services.Controllers
 {
-    public class ValuesController : ApiController
+    public class Default1Controller : ApiController
     {
-        // GET api/values
+        // GET api/default1
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/values/5
+        // GET api/default1/5
         public string Get(int id)
         {
-            return "valor";
+            return "value";
         }
 
-        // POST api/values
+        // POST api/default1
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT api/values/5
+        // PUT api/default1/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE api/values/5
+        // DELETE api/default1/5
         public void Delete(int id)
         {
         }
