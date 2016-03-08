@@ -18,7 +18,7 @@
             $.ajax({
                 type: "POST",
                 data: JSON.stringify(informacion),
-                url: "http://localhost:60377/api/registro/",
+                url: "/api/registro/",
                 contentType: "application/json"
             }).done(function (data) { alert(JSON.stringify(data)); });
         
