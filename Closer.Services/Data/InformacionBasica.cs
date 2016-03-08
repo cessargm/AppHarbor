@@ -15,9 +15,11 @@ namespace Closer.Services.Data
             set { nombreUsuario = value; }
         }
 
+        private int edad;
         public int Edad
         {
-            get { return CalculaEdad(); }            
+            get { return CalculaEdad(); }
+            set { edad = Edad; }
         }
 
         private DateTime fechaNacimiento;
@@ -43,5 +45,14 @@ namespace Closer.Services.Data
             else
                 return (DateTime.Now.Year - 1) - this.fechaNacimiento.Year;               
         }
+
+        private DateTime fechaAlta;
+
+        public DateTime FechaAlta
+        {
+            get { return fechaAlta; }
+            set { fechaAlta = value; }
+        }
+        
     }
 }

@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../Scripts/jquery-1.8.2.min.js"></script> 
+<script language="javascript">
+    function Init() {
+
+        var fecha = $("#txtFecha").val();
+
+        var dia = fecha.split('/')[0];
+        var mes = fecha.split('/')[1];
+        var anio = fecha.split('/')[2];
+       
+        var informacion = { NombreUsuario: $("#txtUserID").val(), NombreCompleto: $("#txtNombreCompleto").val(), FechaNacimiento: new Date(anio, mes, dia) };
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(informacion),
+                url: "http://localhost:60377/api/registro/",
+                contentType: "application/json"
+            }).done(function (data) { alert(JSON.stringify(data)); });
+        
+  
+
+  //      var ajaxGet = $.get("http://localhost:60377/api/registro/KarenMG","", function () {
+  //          alert("Success GET");
+  //      })
+  //.done(function (data) {
+  //    alert(JSON.stringify(data));
+  //})
+  //.fail(function () {
+  //    alert("error");
+  //})
+  //.always(function () {
+  //    alert("finished");
+  //});
+
+    }
+</script>
+</head>
+
+<body>
+    <h3>Nombre: </h3><input type="text" id="txtNombreCompleto" />
+    <h3>User ID: </h3><input type="text" id="txtUserID" />
+    <h3>FechaNacimiento(dd/MM/yyyy): </h3><input type="text" id="txtFecha" />
+    <input type="button" id="btnSubmit" onclick="Init()" value="Enviar" />
+ </body>
+</html>
