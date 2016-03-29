@@ -33,6 +33,7 @@ namespace Closer.Services.Data
         public InformacionBasica AgregarContacto(string nombreUsuario, [FromBody]InformacionBasica contacto, bool esBloqueo = false)
         {
             contacto.FechaAlta = DateTime.Now;
+            contacto.ID = Guid.NewGuid();
             var usuario = Datos.usuarios.Where(u => u.MiInformacion.NombreUsuario == nombreUsuario).First<Usuario>();
             if (esBloqueo)
             {
@@ -83,7 +84,7 @@ namespace Closer.Services.Data
             if (usuario != null)
                 Datos.usuarios.Remove(usuario);
         }
-        
+
 
         public InformacionBasica ActualizarContacto(string nombreUsuario, InformacionBasica contactoActualizado)
         {
@@ -96,10 +97,10 @@ namespace Closer.Services.Data
                     var contactoFinal = contacto;
                     if (contacto.NombreUsuario == contactoActualizado.NombreUsuario)
                     {
-                        contactoFinal     = contactoActualizado; 
+                        contactoActualizado.ID = contacto.ID;
+                        contactoActualizado.FechaAlta = contacto.FechaAlta;
+                        contactoFinal = contactoActualizado;
                     }
-
-
                     contactos.Add(contactoFinal);
                 }
                 usuario.Contactos = contactos;
@@ -107,7 +108,7 @@ namespace Closer.Services.Data
             else
                 contactoActualizado = null;
 
-            return contactoActualizado;  
+            return contactoActualizado;
         }
 
         public void EliminarContacto(string nombreUsuario, string nombreContacto)
@@ -123,5 +124,5 @@ namespace Closer.Services.Data
 
             }
         }
-    }   
+    }
 }
