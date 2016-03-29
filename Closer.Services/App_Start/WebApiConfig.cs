@@ -9,15 +9,22 @@ namespace Closer.Services
     {
         public static void Register(HttpConfiguration config)
         {
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{nombreUsuario}"               
-            );
+         
 
             config.Routes.MapHttpRoute(
                name: "DefaultApi2",
                routeTemplate: "api/{controller}"                 
            );
+
+            config.Routes.MapHttpRoute(
+               name: "DefaultApi3",
+               routeTemplate: "api/{controller}/{action}/{nombreUsuario}"
+           );
+
+            config.Routes.MapHttpRoute(
+             name: "DefaultApi",
+             routeTemplate: "api/{controller}/{nombreUsuario}"
+         );
 
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

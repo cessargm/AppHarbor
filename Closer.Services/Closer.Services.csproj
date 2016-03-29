@@ -29,6 +29,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -198,12 +200,20 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
+    <Compile Include="Controllers\ContactosUbicacionController.cs" />
     <Compile Include="Controllers\RegistroController.cs" />
+    <Compile Include="Controllers\UbicacionController.cs" />
     <Compile Include="Data\CloserContextMigrationConfiguration.cs" />
     <Compile Include="Data\CloserDataContext.cs" />
+    <Compile Include="Data\Datos.cs" />
     <Compile Include="Data\IRegistroRepository.cs" />
+    <Compile Include="Data\IUbicacionRepository.cs" />
     <Compile Include="Data\MockRegistroRepository.cs" />
+    <Compile Include="Data\MockUbicacionRepository.cs" />
     <Compile Include="Data\RegistroRepository.cs" />
+    <Compile Include="Data\Ubicacion.cs" />
+    <Compile Include="Data\Usuario.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -59,6 +59,7 @@ namespace MessageBoard.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IRegistroRepository>().To<MockRegistroRepository>().InRequestScope();
+            kernel.Bind<IUbicacionRepository>().To<MockUbicacionRepository>().InRequestScope();
         }
     }
 }

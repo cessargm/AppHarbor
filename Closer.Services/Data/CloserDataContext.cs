@@ -17,6 +17,7 @@ namespace Closer.Services.Data
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<CloserDataContext, CloserContextMigrationConfiguration>());
         }
 
-    public DbSet<InformacionBasica> InformacionBasicaUsuarios { get; set; }    
+    public DbSet<InformacionBasica> InformacionBasicaUsuarios { get; set; }
+    public DbSet<Usuario> Usuarios { get; set; }
     }
 }

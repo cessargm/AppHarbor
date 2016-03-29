@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -7,8 +8,16 @@ namespace Closer.Services.Data
 {
     public class InformacionBasica
     {
-        private string nombreUsuario;
+        private Guid id;
 
+        public Guid ID
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        
+        private string nombreUsuario;
+            
         public string NombreUsuario
         {
             get { return nombreUsuario; }
@@ -52,7 +61,6 @@ namespace Closer.Services.Data
         {
             get { return fechaAlta; }
             set { fechaAlta = value; }
-        }
-        
-    }
+        }        
+    }    
 }

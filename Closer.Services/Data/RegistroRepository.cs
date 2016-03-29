@@ -14,9 +14,9 @@ namespace Closer.Services.Data
             _ctx = ctx;
         }
 
-        public IQueryable<InformacionBasica> ObtenerPorNombreUsuario(string nombreUsuario)
+        public InformacionBasica ObtenerPorNombreUsuario(string nombreUsuario)
         {
-            return _ctx.InformacionBasicaUsuarios.Where(i => i.NombreUsuario == nombreUsuario);
+            return _ctx.InformacionBasicaUsuarios.Where(i => i.NombreUsuario == nombreUsuario).FirstOrDefault();
         }
 
         public bool Save()
@@ -44,6 +44,44 @@ namespace Closer.Services.Data
                 // TODO log this error
                 return false;
             }
+        }
+
+
+        public List<InformacionBasica> ObtenerContactos(string nombreUsuario, bool esBloqueo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public InformacionBasica AgregarContacto(string nombreUsuario, InformacionBasica contacto, bool esBloqueo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<InformacionBasica> ObtenerUsuarios()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public InformacionBasica ActualizarUsuario(string nombreUsuario, InformacionBasica usuarioActualizado)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EliminarUsuario(string nombreUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public InformacionBasica ActualizarContacto(string nombreUsuario, InformacionBasica usuarioActualizado)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EliminarContacto(string nombreUsuario, string nombreContacto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

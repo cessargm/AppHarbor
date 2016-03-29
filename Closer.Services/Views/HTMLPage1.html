@@ -2,49 +2,144 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" />
     <title></title>
-    <script src="../Scripts/jquery-1.8.2.min.js"></script> 
-<script language="javascript">
-    function Init() {
+    <script src="../Scripts/jquery-1.8.2.min.js"></script>
+    <script language="javascript">
+        function Init(source) {
 
-        var fecha = $("#txtFecha").val();
+            var fecha = $("#txtFecha").val();
 
-        var dia = fecha.split('/')[0];
-        var mes = fecha.split('/')[1];
-        var anio = fecha.split('/')[2];
-       
-        var informacion = { NombreUsuario: $("#txtUserID").val(), NombreCompleto: $("#txtNombreCompleto").val(), FechaNacimiento: new Date(anio, mes, dia) };
-            $.ajax({
-                type: "POST",
-                data: JSON.stringify(informacion),
-                url: "/api/registro/",
-                contentType: "application/json"
-            }).done(function (data) { alert(JSON.stringify(data)); });
-        
-  
+            var dia = fecha.split('/')[0];
+            var mes = fecha.split('/')[1];
+            var anio = fecha.split('/')[2];
 
-  //      var ajaxGet = $.get("http://localhost:60377/api/registro/KarenMG","", function () {
-  //          alert("Success GET");
-  //      })
-  //.done(function (data) {
-  //    alert(JSON.stringify(data));
-  //})
-  //.fail(function () {
-  //    alert("error");
-  //})
-  //.always(function () {
-  //    alert("finished");
-  //});
+            if (source.id == "btnAddUser") {
+                var informacion = { NombreUsuario: $("#txtUserID").val(), NombreCompleto: $("#txtNombreCompleto").val(), FechaNacimiento: new Date(anio, mes, dia) };
+                var _action = "";
+                var _data = "";
+                var _url = "";
 
-    }
-</script>
+                if ($("#opcionAlta")[0].checked) {
+                    _action = "POST";
+                    _url = "/api/registro/";
+                    _data = JSON.stringify(informacion);
+                }
+                else if ($("#opcionBaja")[0].checked) {
+                    _action = "DELETE";
+                    _url = "/api/registro/" + $("#txtUserID").val();
+                    _data = null;
+                }
+                else if ($("#opcionCambio")[0].checked) {
+                    _action = "PUT";
+                    _url = "/api/registro/" + $("#txtUserID").val();
+                    _data = JSON.stringify(informacion);
+                }
+
+                $.ajax({
+                    type: _action,
+                    data: _data,//JSON.stringify(informacion),
+                    url: _url,//"/api/registro/",
+                    contentType: "application/json"
+                }).done(function (data) { alert(JSON.stringify(data)); });
+            }
+            else if (source.id == "btnAddContact") {
+                var informacion = { NombreUsuario: $("#txtContacto").val(), NombreCompleto: $("#txtNombreCompleto").val(), FechaNacimiento: new Date(anio, mes, dia) };
+                var _action = "";
+                var _data = "";
+                var _url = "";
+
+                if ($("#opcionAlta")[0].checked) {
+                    _action = "POST";
+                    _url = "/api/contacto/" + $("#txtUserID").val();;
+                    _data = JSON.stringify(informacion);
+                }
+                else if ($("#opcionBaja")[0].checked) {
+                    _action = "DELETE";
+                    _url = "/api/contacto/" + $("#txtUserID").val() + "/" + +$("#txtContacto").val();;
+                    _data = null;
+                }
+                else if ($("#opcionCambio")[0].checked) {
+                    _action = "PUT";
+                    _url = "/api/contacto/" + $("#txtUserID").val();
+                    _data = JSON.stringify(informacion);
+                }
+
+                $.ajax({
+                    type: _action,
+                    data: _data,//JSON.stringify(informacion),
+                    url: _url,//"/api/registro/",
+                    contentType: "application/json"
+                }).done(function (data) { alert(JSON.stringify(data)); });
+
+            }
+
+            //      var ajaxGet = $.get("http://localhost:60377/api/registro/KarenMG","", function () {
+            //          alert("Success GET");
+            //      })
+            //.done(function (data) {
+            //    alert(JSON.stringify(data));
+            //})
+            //.fail(function () {
+            //    alert("error");
+            //})
+            //.always(function () {
+            //    alert("finished");
+            //});
+
+        }
+
+        var nav = null;
+
+        function getLocation() {
+
+            if (nav == null) {
+                nav = window.navigator;
+            }
+            if (nav != null) {
+                var geoloc = nav.geolocation;
+                if (geoloc != null) {
+                    geoloc.getCurrentPosition(successCallback);
+                }
+                else {
+                    alert("geolocation not supported");
+                }
+            }
+            else {
+                alert("Navigator not found");
+            }
+        }
+
+        function successCallback(position) {
+            alert("latitude: " + position.coords.latitude + " longitude: " + position.coords.longitude);
+            var latlon = position.coords.latitude + "," + position.coords.longitude;
+            var img_url = "http://maps.googleapis.com/maps/api/staticmap?center=" + latlon + "&zoom=14&size=400x300&sensor=false";
+
+            document.getElementById("mapholder").innerHTML = "<img src='" + img_url + "'>";
+        }
+
+    </script>
 </head>
 
-<body>
+<body onload="getLocation()">
     <h3>Nombre: </h3><input type="text" id="txtNombreCompleto" />
     <h3>User ID: </h3><input type="text" id="txtUserID" />
     <h3>FechaNacimiento(dd/MM/yyyy): </h3><input type="text" id="txtFecha" />
-    <input type="button" id="btnSubmit" onclick="Init()" value="Enviar" />
- </body>
+    <h3>Nombre Contacto: </h3><input type="text" id="txtContacto" />
+    <br />
+    <input type="radio" name="accion" value="alta" checked id="opcionAlta"> Alta<br />
+    <input type="radio" name="accion" value="baja" id="opcionBaja"> Baja<br />
+    <input type="radio" name="accion" value="cambio" id="opcionCambio"> Cambio
+
+    <br />
+    <br />
+    <input type="button" id="btnAddUser" onclick="Init(this)" value="Agregar Usuario" />
+    <input type="button" id="btnAddContact" onclick="Init(this)" value="Agregar Contacto" />
+
+<br />
+    <br />
+    <br />
+
+    <div id="mapholder"></div>
+</body>
 </html>
