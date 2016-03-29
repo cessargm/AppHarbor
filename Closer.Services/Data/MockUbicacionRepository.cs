@@ -40,7 +40,7 @@ namespace Closer.Services.Data
             var usuario = Datos.usuarios.Where(u => u.MiInformacion.NombreUsuario == nombreUsuario).FirstOrDefault();
             if (usuario != null)
             {
-                return usuario.Ubicacion.ObtenerUsuariosCercanos();
+                return usuario.ObtenerUsuariosCercanos();
             }
             else return new List<InformacionBasica>();
         }
